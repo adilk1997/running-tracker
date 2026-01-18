@@ -11,6 +11,14 @@ const session = require ('express-session')
 app.use(express.urlencoded({extended: false }))
 app.use(methodOverride('_method'))
 
+app.use (
+    session ({
+        secret: process.env.SESSION_SECRET,
+        resave: false, //non risalva la session se non cambia
+        saveUninitialized: true,
+    })
+)
+
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
     console.log('Connected to mongoDB')
