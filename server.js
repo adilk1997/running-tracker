@@ -7,6 +7,12 @@ const methodOverride = require('method-override')
 const morgan = require ('morgan')
 const session = require ('express-session')
 
+
+app.use(express.urlencoded({extended: false }))
+app.use(methodOverride('_method'))
+
+
+
 app.listen(3000, () => {
     console.log('Server running on port 3000')
 })
