@@ -6,18 +6,20 @@ const mongoose = require ('mongoose')
 const methodOverride = require('method-override')
 const morgan = require ('morgan')
 const session = require ('express-session')
-
+const authRouter = require ('./controllers/auth.js')
 
 app.use(express.urlencoded({extended: false }))
 app.use(methodOverride('_method'))
 
 app.use (
     session ({
-        secret: process.env.SESSION_SECRET,
+        secret: process.env.SECRET_SESSION,
         resave: false, //non risalva la session se non cambia
         saveUninitialized: true,
     })
 )
+
+app.use('/auth', authRouter)
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
