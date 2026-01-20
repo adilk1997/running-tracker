@@ -8,7 +8,7 @@ const morgan = require ('morgan')
 const session = require ('express-session')
 const authRouter = require ('./controllers/auth.js')
 
-app.use(express.urlencoded({extended: true }))
+app.use(express.urlencoded({extended: true })) //quando arriva un form html, traducilo in un oggetto js in req.bbody
 app.use(methodOverride('_method'))
 
 app.use (
