@@ -21,6 +21,8 @@ app.use (
 
 app.use('/auth', authRouter)
 
+app.set ('view engine', 'ejs')
+
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
     console.log('Connected to mongoDB')
