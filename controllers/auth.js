@@ -9,6 +9,11 @@ router.get('/sign-up', (req, res) => {
     res.render('auth/sign-up.ejs')
 })
 
+router.post('/sign-up', (req, res) => {
+    console.log('REQ.BODY:', req.body)
+    res.send('Sing-up form received')
+})
+
 
 
 module.exports = router 

@@ -8,7 +8,7 @@ const morgan = require ('morgan')
 const session = require ('express-session')
 const authRouter = require ('./controllers/auth.js')
 
-app.use(express.urlencoded({extended: false }))
+app.use(express.urlencoded({extended: true }))
 app.use(methodOverride('_method'))
 
 app.use (

@@ -6,14 +6,16 @@
     <title>Sign-up</title>
 </head>
 <body>
-    <form>
+    <form action="/auth/sign-up" method="POST">
     <label>Username</label>
-    <input type="text" />
-  </div>
+    <input type="text" name="username"/>
 
-  <div>
     <label>Password</label>
-    <input type="password" />
+    <input type="password" name="password"/>
+
+    <label>Confirm Password</label>
+    <input type="password" name="confirmPassword">
+    <button type="submit">Submit</button>
 </form>
 
 </body>
