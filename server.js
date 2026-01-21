@@ -7,6 +7,8 @@ const methodOverride = require('method-override')
 const morgan = require ('morgan')
 const session = require ('express-session')
 const authRouter = require ('./controllers/auth.js')
+const runsRouter = require('./controllers/runs.js')
+
 
 app.use(express.urlencoded({extended: true })) //quando arriva un form html, traducilo in un oggetto js in req.bbody
 app.use(methodOverride('_method'))
@@ -19,9 +21,12 @@ app.use (
     })
 )
 
+app.set ('view engine', 'ejs')
 app.use('/auth', authRouter)
 
-app.set ('view engine', 'ejs')
+
+app.use('/runs', runsRouter)
+
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {

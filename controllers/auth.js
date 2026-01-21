@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const bcrypt = require ('bcrypt')
 const User = require('../models/user')
 
 router.get('/test', (req, res) => {
@@ -28,22 +29,49 @@ router.post('/sign-up', async (req, res) => {
             return res.send('Username already taken')
         }
         const hashedPassword = bcrypt.hashSync(req.body.password, 10); //il 10 è il cost factor piu è alto, piu è lento, piu è sicuro
-        req.body.password = hashedPassword;
+        // req.body.password = hashedPassword;
 
-        await User.create(req.body);
+        await User.create({
+            username,
+            password: hashedPassword,
+        });
 
-        res.redirect('/auth/sign-in');
-    } catch (error) {
+        return res.redirect('/auth/log-in')
+      } catch (error) {
         console.log(error);
-        res.redirect('/');
+        return res.redirect('/');
     }
 });
 
-router.post('/log-in', (req, res) => {
-    console.log('LOG-IN BODY', req.body)
-    res.send('Login form received')
+router.post('/log-in', async (req, res) => {
+    try {
+        const username = req.body.username
+        const password = req.body.password
+        const userInDatabase = await User.findOne ({username}) 
+        if (!userInDatabase) {
+            return res.send('Login failed')
+        }
+        const validPassword = bcrypt.compareSync (password, userInDatabase.password)
+        if (!validPassword) {
+            return res.send('Login failed')
+        }
+        req.session.user = {
+            _id: userInDatabase._id,
+            username: userInDatabase.username,
+        }
+        req.session.save(() => {
+        return res.redirect ('/runs')
+        })
+    }   catch (error) {
+        console.log(error)
+        res.redirect('/')
+    }
 })
-    
+
+router.get('/whoami', (req, res) => {
+  res.send(req.session.user || 'Not logged in')
+})
+
 
 
 module.exports = router 
