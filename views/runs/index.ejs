@@ -23,7 +23,7 @@
                         </strong> —
                         <%= run.distance %> km —
                             <%= run.time %> min
-
+                                <a href="/runs/<%= run._id %>/edit">Edit</a>
                                 <form action="/runs/<%= run._id %>?_method=DELETE" method="POST"
                                     style="display:inline;">
                                     <button type="submit">Delete</button>

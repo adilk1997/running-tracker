@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Run</title>
+</head>
+
+<body>
+    <h1>Edit Run</h1>
+    <form action="/runs/<%= run._id %>?_method=PUT" method="POST">
+
+        <label>Date</label>
+        <input type="date" name="date" value="<%= run.date.toISOString().slice(0,10) %>" required>
+
+        <label>Distance (km)</label>
+        <input type="number" name="distance" step="0.01" value="<% run.distance %>" required>
+
+        <label>Time (minutes)</label>
+        <input type="number" name="time" step="1" value="<% run.time %>" required>
+
+        <button type="submit">Update Run</button>
+    </form>
+    <p><a href="/runs">Back</a></p>
+</body>
+
+</html>
