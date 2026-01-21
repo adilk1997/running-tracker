@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Runs</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Runs</title>
 </head>
+
 <body>
-  <h1>Your Runs</h1>
+    <h1>Your Runs</h1>
 
-  <a href="/runs/new">Add a new run</a>
+    <a href="/runs/new">Add a new run</a>
 
-  <% if (runs.length === 0) { %>
-    <p>No runs yet.</p>
-  <% } else { %>
-    <ul>
-      <% runs.forEach((run) => { %>
-        <li>
-          <strong><%= run.date %></strong> —
-          <%= run.distance %> km —
-          <%= run.time %> min
-        </li>
-      <% }) %>
-    </ul>
-  <% } %>
+    <% if (runs.length===0) { %>
+        <p>No runs yet.</p>
+        <% } else { %>
+            <ul>
+                <% runs.forEach((run)=> { %>
+                    <li>
+                        <strong>
+                            <%= run.date %>
+                        </strong> —
+                        <%= run.distance %> km —
+                            <%= run.time %> min
+
+                                <form action="/runs/<%= run._id %>?_method=DELETE" method="POST"
+                                    style="display:inline;">
+                                    <button type="submit">Delete</button>
+                                </form>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } %>
 </body>
+
 </html>

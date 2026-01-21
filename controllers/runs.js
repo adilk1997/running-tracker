@@ -35,4 +35,17 @@ router.post('/', isSignedIn, async (req, res) => {
       }
 })
 
+router.delete('/:runId', isSignedIn, async (req, res) => {
+  try {
+    const user = await User.findById(req.session.user._id)
+    user.runs.id(req.params.runId).deleteOne()
+    await user.save()
+    return res.redirect('/runs')
+  } catch (error) {
+    console.log(error)
+    return res.redirect('/runs')
+  }
+})
+
+
 module.exports = router
