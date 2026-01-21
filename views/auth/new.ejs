@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Run</title>
+</head>
+<body>
+    <h1>Add a Run</h1>
+    <form action="/runs" method="POST">
+        <label>Date</label>
+        <input type="date" name="date" required>
+
+        <label>Distance (km)</label>
+        <input type="number" name="time" step="1" required>
+
+        <button type="submit">Save run</button>
+    </form>
+</body>
+</html>
