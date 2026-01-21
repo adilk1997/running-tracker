@@ -17,18 +17,18 @@
 
     <%
       // Totals
-      var totalDistance = 0
-      var totalTime = 0
+      let totalDistance = 0;
+      let totalTime = 0;
 
-      runs.forEach(function(run) {
-        totalDistance += Number(run.distance) || 0
-        totalTime += Number(run.time) || 0
-      })
+      runs.forEach((run) => {
+        totalDistance += Number(run.distance) || 0;
+        totalTime += Number(run.time) || 0;
+      });
 
       // Total time in hh:mm
-      var totalHours = Math.floor(totalTime / 60)
-      var totalMinutes = totalTime % 60
-      var totalMinutesPadded = totalMinutes < 10 ? ('0' + totalMinutes) : totalMinutes
+      const totalHours = Math.floor(totalTime / 60);
+      const totalMinutes = totalTime % 60;
+      const totalMinutesPadded = totalMinutes < 10 ? ('0' + totalMinutes) : totalMinutes;
     %>
 
     <p>
@@ -37,28 +37,31 @@
     </p>
 
     <ul>
-      <% runs.forEach(function(run) { %>
+      <% runs.forEach((run) => { %>
         <%
           // Date
-          var dateStr = run.date ? run.date.toLocaleDateString('en-GB') : ''
+          const dateStr = run.date ? run.date.toLocaleDateString('en-GB') : '';
 
           // Pace (min/km) in mm:ss
-          var paceMin = 0
-          var paceSec = 0
+          let paceMin = 0;
+          let paceSec = 0;
 
-          if (run.distance && Number(run.distance) > 0) {
-            var pace = Number(run.time) / Number(run.distance) // minutes per km (decimal)
-            paceMin = Math.floor(pace)
-            paceSec = Math.round((pace - paceMin) * 60)
+          const distanceNum = Number(run.distance);
+          const timeNum = Number(run.time);
+
+          if (distanceNum > 0 && !Number.isNaN(distanceNum) && !Number.isNaN(timeNum)) {
+            const pace = timeNum / distanceNum; // minutes per km (decimal)
+            paceMin = Math.floor(pace);
+            paceSec = Math.round((pace - paceMin) * 60);
 
             // handle rounding to 60 seconds
             if (paceSec === 60) {
-              paceMin += 1
-              paceSec = 0
+              paceMin += 1;
+              paceSec = 0;
             }
           }
 
-          var paceSecPadded = paceSec < 10 ? ('0' + paceSec) : paceSec
+          const paceSecPadded = paceSec < 10 ? ('0' + paceSec) : paceSec;
         %>
 
         <li>
