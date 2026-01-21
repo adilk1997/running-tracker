@@ -21,6 +21,11 @@ app.use (
     })
 )
 
+app.get('/', (req, res) => {
+    res.redirect ('/runs')
+})
+
+
 app.set ('view engine', 'ejs')
 app.use('/auth', authRouter)
 

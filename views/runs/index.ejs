@@ -1,37 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Runs</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Runs</title>
 </head>
 
 <body>
-    <h1>Your Runs</h1>
+  <h1>Your Runs</h1>
 
-    <a href="/runs/new">Add a new run</a>
+  <a href="/runs/new">Add a new run</a>
 
-    <% if (runs.length===0) { %>
-        <p>No runs yet.</p>
-        <% } else { %>
-            <ul>
-                <% runs.forEach((run)=> { %>
-                    <li>
-                        <strong>
-                            <%= run.date %>
-                        </strong> —
-                        <%= run.distance %> km —
-                            <%= run.time %> min
-                                <a href="/runs/<%= run._id %>/edit">Edit</a>
-                                <form action="/runs/<%= run._id %>?_method=DELETE" method="POST"
-                                    style="display:inline;">
-                                    <button type="submit">Delete</button>
-                                </form>
-                    </li>
-                    <% }) %>
-            </ul>
-            <% } %>
+  <% if (runs.length === 0) { %>
+    <p>No runs yet.</p>
+  <% } else { %>
+
+    <%
+      // Totals
+      var totalDistance = 0
+      var totalTime = 0
+
+      runs.forEach(function(run) {
+        totalDistance += Number(run.distance) || 0
+        totalTime += Number(run.time) || 0
+      })
+
+      // Total time in hh:mm
+      var totalHours = Math.floor(totalTime / 60)
+      var totalMinutes = totalTime % 60
+      var totalMinutesPadded = totalMinutes < 10 ? ('0' + totalMinutes) : totalMinutes
+    %>
+
+    <p>
+      <strong>Total distance:</strong> <%= totalDistance %> km<br />
+      <strong>Total time:</strong> <%= totalHours %>:<%= totalMinutesPadded %> (hh:mm)
+    </p>
+
+    <ul>
+      <% runs.forEach(function(run) { %>
+        <%
+          // Date
+          var dateStr = run.date ? run.date.toLocaleDateString('en-GB') : ''
+
+          // Pace (min/km) in mm:ss
+          var paceMin = 0
+          var paceSec = 0
+
+          if (run.distance && Number(run.distance) > 0) {
+            var pace = Number(run.time) / Number(run.distance) // minutes per km (decimal)
+            paceMin = Math.floor(pace)
+            paceSec = Math.round((pace - paceMin) * 60)
+
+            // handle rounding to 60 seconds
+            if (paceSec === 60) {
+              paceMin += 1
+              paceSec = 0
+            }
+          }
+
+          var paceSecPadded = paceSec < 10 ? ('0' + paceSec) : paceSec
+        %>
+
+        <li>
+          <strong><%= dateStr %></strong> —
+          <%= run.distance %> km —
+          <%= run.time %> min —
+          <strong><%= paceMin %>:<%= paceSecPadded %> min/km</strong>
+
+          <a href="/runs/<%= run._id %>/edit">Edit</a>
+
+          <form action="/runs/<%= run._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+
+  <% } %>
 </body>
-
 </html>
