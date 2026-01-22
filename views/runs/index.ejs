@@ -8,17 +8,23 @@
 </head>
 
 <body>
-  <h1>Your Runs</h1>
+    <form action="/auth/log-out" method="GET">
+      <button class="btn btn-danger" type="submit">Log out</button>
+    </form>
+  
+    <h1>Your Runs</h1>
 
   <a href="/runs/new">Add a new run</a>
+
+  </header>
 
   <% if (runs.length === 0) { %>
     <p>No runs yet.</p>
   <% } else { %>
 
     <%
-<!--Totals -->
-      let totalDistance = 0;
+
+    let totalDistance = 0;
       let totalTime = 0;
 
       runs.forEach((run) => {
@@ -26,7 +32,6 @@
         totalTime += Number(run.time) || 0;
       });
 
-<!--  Total time in hh:mm -->
       const totalHours = Math.floor(totalTime / 60);
       const totalMinutes = totalTime % 60;
       const totalMinutesPadded = totalMinutes < 10 ? ('0' + totalMinutes) : totalMinutes;
@@ -40,10 +45,9 @@
     <ul>
       <% runs.forEach((run) => { %>
         <%
-<!--Date-->
-          const dateStr = run.date ? run.date.toLocaleDateString('en-GB') : '';
 
-          // Pace (min/km) in mm:ss
+        const dateStr = run.date ? run.date.toLocaleDateString('en-GB') : '';
+
           let paceMin = 0;
           let paceSec = 0;
 
@@ -55,7 +59,7 @@
             paceMin = Math.floor(pace);
             paceSec = Math.round((pace - paceMin) * 60);
 
-<!--handle rounding to 60 seconds-->
+
             if (paceSec === 60) {
               paceMin += 1;
               paceSec = 0;
@@ -63,15 +67,46 @@
           }
 
           const paceSecPadded = paceSec < 10 ? ('0' + paceSec) : paceSec;
+
+          let avgSpeed = 0;
+
+            if (distanceNum > 0 && timeNum > 0 && !Number.isNaN(distanceNum) && !Number.isNaN(timeNum)) {
+            avgSpeed = (distanceNum / (timeNum / 60)).toFixed(1);
+        }
+
         %>
 
         <li>
           <strong><%= dateStr %></strong> —
-          <%= run.distance %> km —
-          <%= run.time %> min —
-          <strong><%= paceMin %>:<%= paceSecPadded %> min/km</strong>
+    <div style="display:inline-flex; gap:20px; align-items:flex-end;">
 
-          <a href="/runs/<%= run._id %>/edit">Edit</a>
+    <div style="text-align:center;">
+     <small>Distance</small><br>
+     <strong><%= run.distance %> km</strong>
+    </div>
+
+     <div style="text-align:center;">
+     <small>Minutes</small><br>
+     <strong><%= run.time %> min</strong>
+    </div>
+
+    <div style="text-align:center;">
+     <small>Avg pace</small><br>
+        <strong><%= paceMin %>:<%= paceSecPadded %> min/km</strong>
+     </div>
+
+    <div style="text-align:center;">
+     <small>Avg speed</small><br>
+        <strong><%= avgSpeed %> km/h</strong>
+    </div>
+
+    </div>
+
+
+          <form action="/runs/<%= run._id %>/edit" method="GET" style="display:inline;">
+            <button type="submit">Edit</button>
+          </form>
+
 
           <form action="/runs/<%= run._id %>?_method=DELETE" method="POST" style="display:inline;">
             <button type="submit">Delete</button>

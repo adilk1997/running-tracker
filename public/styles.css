@@ -1,52 +1,114 @@
 body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #111827);
+  color: white;
   font-family: Arial, sans-serif;
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 16px;
-  line-height: 1.4;
 }
 
-a {
-  text-decoration: none;
+form[action="/auth/log-in"],
+form[action="/auth/sign-up"] {
+  max-width: 360px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  padding: 22px;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+body > h1 {
+  text-align: center;
   margin-bottom: 16px;
 }
 
-.nav a {
-  margin-right: 12px;
+form[action="/auth/log-in"] label,
+form[action="/auth/sign-up"] label {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
 }
 
-.card {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 12px 14px;
-  margin: 10px 0;
-}
-
-.actions {
-  margin-top: 8px;
-}
-
-button {
-  padding: 6px 10px;
+form[action="/auth/log-in"] input,
+form[action="/auth/sign-up"] input {
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px;
   border-radius: 8px;
-  border: 1px solid #333;
-  cursor: pointer;
+  border: none;
 }
 
-button:hover {
+form[action="/auth/log-in"] button,
+form[action="/auth/sign-up"] button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background: #60a5fa;
+  color: #0b1220;
+}
+
+form[action="/auth/log-in"] button:hover,
+form[action="/auth/sign-up"] button:hover {
   opacity: 0.9;
 }
 
-input {
+body > p {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+body > p a {
+  color: #93c5fd;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+body > p a:hover {
+  text-decoration: underline;
+}
+
+
+form[action="/auth/log-out"] {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+form[action="/auth/log-out"] button {
+  width: 140px;
+  font-size: 12px;
+  padding: 6px 0;
+  border-radius: 6px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form[action="/auth/log-out"] button:hover {
+  opacity: 0.9;
+}
+
+ul li {
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+img[src="/not-running.png"] {
+  width: 100%;        
+  max-width: 240px;
+  max-height: 60vh;  
+  height: auto;      
   display: block;
-  margin: 6px 0 12px;
-  padding: 8px;
-  width: 100%;
-  max-width: 340px;
+  margin: 0 auto;    
+  border-radius: 12px;
 }

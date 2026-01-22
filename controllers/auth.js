@@ -12,7 +12,7 @@ router.get('/sign-up', (req, res) => {
 })
 
 router.get('/log-in', (req, res) => {
-  res.render('auth/log-in')
+  res.render('auth/log-in', { error: req.query.error})
 })
 
 
@@ -49,7 +49,7 @@ router.post('/log-in', async (req, res) => {
         const password = req.body.password
         const userInDatabase = await User.findOne ({username}) 
         if (!userInDatabase) {
-            return res.send('Login failed')
+            return res.redirect('/auth/log-in?error=1')
         }
         const validPassword = bcrypt.compareSync (password, userInDatabase.password)
         if (!validPassword) {
@@ -68,10 +68,11 @@ router.post('/log-in', async (req, res) => {
     }
 })
 
-router.get('/whoami', (req, res) => {
-  res.send(req.session.user || 'Not logged in')
+router.get('/log-out', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/auth/log-in')
+  })
 })
-
 
 
 module.exports = router 
