@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Runs</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 
 <body>
@@ -16,7 +17,7 @@
   <% } else { %>
 
     <%
-      // Totals
+<!--Totals -->
       let totalDistance = 0;
       let totalTime = 0;
 
@@ -25,7 +26,7 @@
         totalTime += Number(run.time) || 0;
       });
 
-      // Total time in hh:mm
+<!--  Total time in hh:mm -->
       const totalHours = Math.floor(totalTime / 60);
       const totalMinutes = totalTime % 60;
       const totalMinutesPadded = totalMinutes < 10 ? ('0' + totalMinutes) : totalMinutes;
@@ -39,7 +40,7 @@
     <ul>
       <% runs.forEach((run) => { %>
         <%
-          // Date
+<!--Date-->
           const dateStr = run.date ? run.date.toLocaleDateString('en-GB') : '';
 
           // Pace (min/km) in mm:ss
@@ -54,7 +55,7 @@
             paceMin = Math.floor(pace);
             paceSec = Math.round((pace - paceMin) * 60);
 
-            // handle rounding to 60 seconds
+<!--handle rounding to 60 seconds-->
             if (paceSec === 60) {
               paceMin += 1;
               paceSec = 0;

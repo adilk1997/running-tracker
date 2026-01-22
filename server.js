@@ -32,6 +32,9 @@ app.use('/auth', authRouter)
 
 app.use('/runs', runsRouter)
 
+app.use(express.static('public'))
+
+
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
