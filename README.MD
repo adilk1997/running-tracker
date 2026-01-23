@@ -1,6 +1,6 @@
 ## Running Tracker
-1. -This project is a MEN Stack CRUD application built using MongoDB, Express, Node.js, and EJS.
-2. -The app allows users to sign up, log in, and track their running activities in a private account.
+1. -This project is a MEN Stack CRUD aplication built using MongoDB, Express, Node.js, and EJS.
+2. -The app allows users to sing up, log in, and track their running activities in a private account.
 3. -The project focuses on full CRUD functionality, authentication, authorization, and server-side rendering.
 ---
 ## How-to-Use
@@ -18,7 +18,7 @@
 ## Features
 1. -Session-based user authentication.
 2. -Full CRUD operations for runs.
-3. -Authorization to ensure only the owner can edit or delete data.
+3. -Authorizattion to ensure only the owner can edit or delete data.
 4. -Automatic calculation of total distance and total time.
 5. -Average pace and average speed calculation.
 6. -Responsive and consistent UI across pages.
@@ -40,3 +40,4 @@
 ## Next-Steps
 1. -Add a section for your Personal Record.
 2. -Create personal journey.
+3. -Compare your runs with your friend's run.

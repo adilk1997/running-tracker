@@ -112,3 +112,9 @@ img[src="/not-running.png"] {
   margin: 0 auto;    
   border-radius: 12px;
 }
+
+h1 {
+  font-size: 36px;
+  letter-spacing: 1px;
+}
+
