@@ -8,15 +8,15 @@ const morgan = require ('morgan')
 const session = require ('express-session')
 const authRouter = require ('./controllers/auth.js')
 const runsRouter = require('./controllers/runs.js')
+const PORT = process.env.PORT || 3000;
 
-
-app.use(express.urlencoded({extended: true })) //quando arriva un form html, traducilo in un oggetto js in req.bbody
+app.use(express.urlencoded({extended: true }))
 app.use(methodOverride('_method'))
 
 app.use (
     session ({
         secret: process.env.SECRET_SESSION,
-        resave: false, //non risalva la session se non cambia
+        resave: false, 
         saveUninitialized: true,
     })
 )
@@ -39,6 +39,6 @@ mongoose.connection.on('connected', () => {
     console.log('Connected to mongoDB')
 })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log('Server running on port 3000')
 })
