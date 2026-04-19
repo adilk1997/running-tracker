@@ -132,9 +132,10 @@ body {
 }
 
 .logout-form {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
 }
 
 .page-header {
