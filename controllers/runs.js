@@ -6,7 +6,13 @@ const User = require ('../models/user')
 router.get('/', isSignedIn, async (req, res) => {
     try {
         const user = await User.findById(req.session.user._id)
-        res.render ('runs/index', { runs: user.runs})
+
+        const sortedRuns = user.runs.sort((a, b) => {
+            return new Date(b.date) - new Date(a.date)
+        })
+
+        res.render('runs/index', { runs: sortedRuns })
+
     } catch (error) {
         console.log(error)
         res.redirect('/')

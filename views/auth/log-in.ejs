@@ -16,32 +16,29 @@
     </p>
 
     <% if (error) { %>
-    <div style="text-align:center; margin-bottom:16px;">
-     <img 
-         src="/not-running.png" 
-         alt="Not running" 
-         style="max-width:100%; border-radius:12px;" />
-        <p style="color:#f87171; font-weight:bold; margin-top:8px;">
-         I see you, you're not running!
-         Try again!
-        </p>
-     </div>
-    <% } %>
+        <div style="text-align:center; margin-bottom:16px;">
+            <img src="/not-running.png" alt="Not running" style="max-width:100%; border-radius:12px;" />
+            <p style="color:#f87171; font-weight:bold; margin-top:8px;">
+                I see you, you're not running!
+                Try again!
+            </p>
+        </div>
+        <% } %>
 
-    <form action="/auth/log-in" method="POST">
-            <label>Username</label>
-            <input type="text" name="username" required/>
+            <form action="/auth/log-in" method="POST">
+                <label>Username</label>
+                <input type="text" name="username" required />
 
-            <label>Password</label>
-            <input type="password" name="password" required />
+                <label>Password</label>
+                <input type="password" name="password" required />
 
-        <button type="submit">Log In</button>
-    <p>
-        Don’t have an account?
-        <a href="/auth/sign-up">Sign up</a>
-    </p>
+                <button type="submit">Log In</button>
+                <p class="auth-switch">
+                    Don’t have an account?
+                    <a href="/auth/sign-up">Sign up</a>
+                </p>
 
-    </form>
+            </form>
 
 </body>
 

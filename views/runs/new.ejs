@@ -1,24 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Run</title>
-    <link rel="stylesheet" href="/styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add a Run</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-    <h1>Add a Run</h1>
-    <form action="/runs" method="POST">
-        <label>Date</label>
-        <input type="date" name="date" required>
+  <div class="page page-narrow">
+    <div class="form-card">
+      <div class="form-header">
+        <h1>Add a Run</h1>
+        <p class="subtitle">Log a new training session</p>
+      </div>
 
-        <label>Distance (km)</label>
-        <input type="number" name="distance" step="1" required>
+      <form action="/runs" method="POST" class="run-form">
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            required
+          />
+        </div>
 
-        <label>Time (minutes)</label>
-        <input type="number" name="time" step="1" required>
+        <div class="form-group">
+          <label for="distance">Distance (km)</label>
+          <input
+            type="number"
+            id="distance"
+            name="distance"
+            step="0.01"
+            min="0"
+            placeholder="e.g. 10"
+            required
+          />
+        </div>
 
-        <button type="submit">Save run</button>
-    </form>
+        <div class="form-group">
+          <label for="time">Time (minutes)</label>
+          <input
+            type="number"
+            id="time"
+            name="time"
+            min="1"
+            placeholder="e.g. 52"
+            required
+          />
+        </div>
+
+        <div class="form-actions">
+          <a href="/runs" class="btn btn-secondary">Cancel</a>
+          <button type="submit" class="btn btn-primary">Save Run</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
